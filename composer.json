@@ -1,7 +1,7 @@
 {
   "name": "tivins/baz-core",
   "description": "description",
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
     {
@@ -11,8 +11,8 @@
   "require": {
     "php": "^8.2",
     "tivins/database": "dev-main",
-    "ext-ctype": "*",
     "firebase/php-jwt": "^6.1",
+    "ext-ctype": "*",
     "ext-mbstring": "*"
   },
   "require-dev": {
