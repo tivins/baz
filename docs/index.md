@@ -6,10 +6,13 @@
 cd path/to/new/project
 composer init
 composer require tivins/baz-core dev-main
+mkdir src/app
 ```
 
 ### Create Schema
 ```php
+namespace MyNamespace;
+
 use Tivins\baz\install\schema\Table;
 use Tivins\baz\install\schema\Field;
 
@@ -43,6 +46,8 @@ class Schema extends \Tivins\baz\install\schema\Schema
 ### Create Installer
 
 ```php
+namespace MyNamespace;
+
 class Installer extends \Tivins\baz\core\install\Installer
 {
     protected function install(): void
@@ -74,18 +79,17 @@ App::setInstallerClass(Installer::class);
 const DEBUG = false;
 ```
 
-### Index.php
+### Bootstrap
 
 in `${ROOT}/boot.php`
 
 ```php
 <?php
-
+use tivins\baz\App;
 const APP_ROOT = __dir__;
 require_once APP_ROOT . '/vendor/autoload.php';
-\tivins\baz\App::loadConfig();
+App::loadConfig();
 if ( !defined('APP_INSTALL')) {
-    require \tivins\baz\App::getModelsFilename();
+    require App::getModelsFilename();
 }
-require 'ui_fr.php';
 ```
