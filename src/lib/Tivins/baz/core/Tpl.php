@@ -3,6 +3,8 @@
 namespace Tivins\baz\core;
 
 
+use Tivins\baz\core\intl\Intl;
+
 /**
  * Simple Template Engine
  *

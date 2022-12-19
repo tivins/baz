@@ -1,6 +1,6 @@
 <?php
 
-namespace Tivins\baz\core;
+namespace Tivins\baz\core\intl;
 
 class Intl
 {
