@@ -2,6 +2,8 @@
 
 namespace Tivins\baz\core\system;
 
+use Tivins\baz\core\Color;
+
 class Terminal
 {
     // also: chr(27) or "\033"
@@ -38,5 +40,16 @@ class Terminal
     public static function goDown(int $nbLines): void
     {
         echo self::ESCAPE_CHAR . '[' . $nbLines . 'B';
+    }
+
+    public static function decorateRGB(?Color $foreColor, ?Color $backColor): void
+    {
+        if ($foreColor) echo self::ESCAPE_CHAR . "[38;2;{$foreColor->red};{$foreColor->green};{$foreColor->blue}m";
+        if ($backColor) echo self::ESCAPE_CHAR . "[48;2;{$backColor->red};{$backColor->green};{$backColor->blue}m";
+    }
+
+    public static function decorateReset(): void
+    {
+        echo self::ESCAPE_CHAR . '[0m';
     }
 }

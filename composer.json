@@ -10,7 +10,10 @@
   ],
   "require": {
     "php": "^8.2",
-    "tivins/database": "dev-main"
+    "tivins/database": "dev-main",
+    "ext-ctype": "*",
+    "firebase/php-jwt": "^6.1",
+    "ext-mbstring": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5"
