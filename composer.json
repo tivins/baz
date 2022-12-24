@@ -1,5 +1,5 @@
 {
-  "name": "tivins/baz-core",
+  "name": "tivins/baz",
   "description": "description",
   "keywords": ["php","framework"],
   "minimum-stability": "stable",
