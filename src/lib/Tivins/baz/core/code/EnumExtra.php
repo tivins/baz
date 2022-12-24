@@ -2,8 +2,8 @@
 
 namespace Tivins\baz\core\code;
 
-
 use ReflectionEnum;
+use Tivins\baz\core\intl\Intl;
 
 trait EnumExtra
 {
@@ -26,9 +26,9 @@ trait EnumExtra
         );
     }
 
-    /*public function translate(): string
+    public function translate(): string
     {
         $intl_key = strtolower(str_replace('\\', '_', static::class)) . '_' . $this->name;
         return Intl::get($intl_key);
-    }*/
+    }
 }

@@ -88,10 +88,11 @@ class MdlWriter {
         $body    .= "\n";
         $body    .= self::writeComment(0, self::$schema->getComment());
         $body    .= 'namespace ' . self::$schema->getNamespace() . ';' . "\n\n";
-        $body    .= 'use tivins\baz\{ DB, DBCondition, EnumExtra, Mdl };' . "\n";
+        $body    .= 'use tivins\baz\{ DB, DBCondition, Mdl };' . "\n";
         $body    .= 'use tivins\baz\api\APIAccess;' . "\n";
         $body    .= 'use tivins\baz\api\APIRequestHeaderBearer;' . "\n";
-        $body    .= 'use tivins\baz\http\{ Method };' . "\n";
+        $body    .= 'use Tivins\baz\core\net\http\Method;' . "\n";
+        $body    .= 'use Tivins\baz\core\code\EnumExtra;' . "\n";
         $body    .= "\n";
         $exposed = [];
         foreach (self::$schema->getEnums() as $enum) {
