@@ -1,12 +1,16 @@
 {
   "name": "tivins/baz-core",
   "description": "description",
+  "keywords": ["php","framework"],
   "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
     {
       "name": "tivins"
     }
+  ],
+  "bin": [
+    "src/lib/Tivins/baz/install/bin/prepare.php"
   ],
   "require": {
     "php": "^8.2",

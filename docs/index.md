@@ -66,10 +66,10 @@ create a file : `${ROOT}/config/my-app.test:9991.php`
 ```php
 <?php
 
-use tivins\app\install\Installer;
-use tivins\app\Schema;
-use tivins\baz\App;
-use tivins\baz\DB;
+use Tivins\app\install\Installer;
+use Tivins\app\Schema;
+use Tivins\baz\App;
+use Tivins\baz\DB;
 
 App::start(historize: true, log_dir: APP_ROOT . '/logs');
 DB::initMariaDB('my_project', 'root', 'some-password');
@@ -85,7 +85,7 @@ in `${ROOT}/boot.php`
 
 ```php
 <?php
-use tivins\baz\App;
+use Tivins\baz\App;
 const APP_ROOT = __dir__;
 require_once APP_ROOT . '/vendor/autoload.php';
 App::loadConfig();

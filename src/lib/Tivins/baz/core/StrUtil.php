@@ -13,7 +13,7 @@ class StrUtil {
     {
         $key = ucwords(str_replace('_', ' ', $key));
         $upper = str_replace(' ', '', $key);
-        return $lower ? ucfirst($upper) : $upper;
+        return $lower ? lcfirst($upper) : ucfirst($upper);
     }
 
     public static function slug(string $get_name): string
