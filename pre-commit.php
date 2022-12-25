@@ -3,7 +3,11 @@
 require 'vendor/autoload.php';
 
 
-$files = ['HttpClientBasic','HttpClientAuth'];
+$files = [
+    'HttpClientBasic',
+    'HttpClientAuth',
+    'HttpClientAsync',
+];
 
 $data = [];
 
@@ -20,8 +24,8 @@ $coreMd = file_get_contents('docs/core_.md');
 foreach ($files as $file) {
     $coreMd = str_replace('{{{ '.$file.' }}}',
         "\n\n```php\n" . trim($data[$file]['src']) . "\n```\n"
-        ."<details><summary>See the response result</summary>\n\n"
-        . "output:\n```\n" . $data[$file]['out']
+        ."<details><summary>See output</summary>\n\n"
+        . "```\n" . $data[$file]['out']
         . "```\n"
         . "</details>\n",
         $coreMd

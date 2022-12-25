@@ -1,13 +1,15 @@
-# Baz Core
+# Baz\Core
 
-## HTTP Client
+NB: outputs are stored at pre-commit time.
 
-### Synchronous
+## HTTP Client (`Tivins\Baz\Core\Net\Client`)
 
 * [Minimal](#minimal)
-* [Post + Token Bearer](#post-token-bearer)
+* [Post + Token Bearer](#post--token-bearer)
+* [Asynchronous](#asynchronous)
 
-#### Minimal
+
+### Minimal
 
 
 
@@ -28,11 +30,10 @@ try {
 echo $client . ' ' . $client->getCode() . ' (' . strlen($client->getContent()) . ')', PHP_EOL,
     $client->getContent(), PHP_EOL;
 ```
-<details><summary>See the response result</summary>
+<details><summary>See output</summary>
 
-output:
 ```
-Tivins\Baz\Core\Net\Client#4 200 (495)
+Tivins\Baz\Core\Net\Client#4 200 (497)
 {
   "args": {}, 
   "data": "", 
@@ -43,8 +44,8 @@ Tivins\Baz\Core\Net\Client#4 200 (495)
     "Content-Length": "0", 
     "Content-Type": "application/x-www-form-urlencoded", 
     "Host": "httpbin.org", 
-    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:98.0) Gecko/xx.xx.xx.xx Firefox/98.0", 
-    "X-Amzn-Trace-Id": "Root=xx.xx.xx.xxd-661d02dexx.xx.xx.xxea7f"
+    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:103.0) Gecko/xx.xx.xx.xx Firefox/103.0", 
+    "X-Amzn-Trace-Id": "Root=1-63a8cbxx.xx.xx.xxb79adxx.xx.xx.xxe"
   }, 
   "json": null, 
   "method": "GET", 
@@ -56,7 +57,7 @@ Tivins\Baz\Core\Net\Client#4 200 (495)
 </details>
 
 
-#### Post + Token Bearer
+### Post + Token Bearer
 
 
 
@@ -81,9 +82,8 @@ $client = (new Client('https://httpbin.org/anything'))
 echo $client . ' ' . $client->getCode() . ' (' . strlen($client->getContent()) . ')', PHP_EOL,
 $client->getContent(), PHP_EOL;
 ```
-<details><summary>See the response result</summary>
+<details><summary>See output</summary>
 
-output:
 ```
 Tivins\Baz\Core\Net\Client#21 200 (568)
 {
@@ -97,8 +97,8 @@ Tivins\Baz\Core\Net\Client#21 200 (568)
     "Content-Length": "11", 
     "Content-Type": "application/json", 
     "Host": "httpbin.org", 
-    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:108.0) Gecko/xx.xx.xx.xx Firefox/108.0", 
-    "X-Amzn-Trace-Id": "Root=xx.xx.xx.xxe-xx.xx.xx.xxeefxx.xx.xx.xxe"
+    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:105.0) Gecko/xx.xx.xx.xx Firefox/105.0", 
+    "X-Amzn-Trace-Id": "Root=1-63a8cbxx.xx.xx.xxca3faxx.xx.xx.xx"
   }, 
   "json": {
     "yo": "lo"
@@ -112,21 +112,58 @@ Tivins\Baz\Core\Net\Client#21 200 (568)
 </details>
 
 
-### Asynchronous
+## Asynchronous
+
+
+
 ```php
-use Tivins\Baz\Core\Net\ClientAsync;
-use Tivins\Baz\Core\Net\ClientException;
+<?php
+use Tivins\Baz\Core\Net\Client;
 use Tivins\Baz\Core\Net\ClientMulti;
-try {
-    $client = (new Client("https://example.com"))
-        ->setProgressCallback(function(ClientMulti $client, float $duration) {
-            echo "$client => $duration\n"; 
-        })
-        ->execute();
-}
-catch (ClientException $ex) {
-    echo "Failed : {$ex->client}\n-> {$ex->getMessage()}\n";
-    exit(1);
-}
-var_dump($client->getCode(),$client->getContent());
+use Tivins\Baz\Core\Net\Http\Header;
+use Tivins\Baz\Core\Net\Http\Headers;
+
+require 'vendor/autoload.php';
+
+$client = (new \Tivins\Baz\Core\Net\ClientAsync('https://httpbin.org/anything'))
+    ->setProgressCallback(function(ClientMulti $client, float $duration) {
+        echo "$client => ".number_format($duration,1)."s\n";
+    })
+    ->postJSON(['yo'=>'lo'])
+    ->execute();
+
+echo $client . ' ' . $client->getCode() . ' (' . strlen($client->getContent()) . ')', PHP_EOL,
+$client->getContent(), PHP_EOL;
 ```
+<details><summary>See output</summary>
+
+```
+Tivins\Baz\Core\Net\ClientMulti#5 => 0.0s
+Tivins\Baz\Core\Net\ClientMulti#5 => 0.1s
+Tivins\Baz\Core\Net\ClientMulti#5 => 0.2s
+Tivins\Baz\Core\Net\ClientMulti#5 => 0.3s
+Tivins\Baz\Core\Net\ClientMulti#5 => 0.4s
+Tivins\Baz\Core\Net\ClientMulti#5 => 0.5s
+Tivins\Baz\Core\Net\ClientMulti#5 => 0.6s
+Tivins\Baz\Core\Net\ClientAsync#4 200 (497)
+{
+  "args": {}, 
+  "data": "", 
+  "files": {}, 
+  "form": {}, 
+  "headers": {
+    "Accept": "*/*", 
+    "Content-Length": "0", 
+    "Content-Type": "application/x-www-form-urlencoded", 
+    "Host": "httpbin.org", 
+    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:100.0) Gecko/xx.xx.xx.xx Firefox/100.0", 
+    "X-Amzn-Trace-Id": "Root=1-63a8cbxx.xx.xx.xxafxx.xx.xx.xxe"
+  }, 
+  "json": null, 
+  "method": "GET", 
+  "origin": "xx.xx.xx.xx", 
+  "url": "https://httpbin.org/anything"
+}
+
+```
+</details>
