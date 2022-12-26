@@ -23,12 +23,13 @@ require 'vendor/autoload.php';
 
 try {
     $client = (new Client('https://httpbin.org/anything'))->execute();
-} catch (ClientException $ex) {
+}
+catch (ClientException $ex) {
     exit($ex->client . ' : ' . $ex->getMessage() . "\n");
 }
 
-echo $client . ' ' . $client->getCode() . ' (' . strlen($client->getContent()) . ')', PHP_EOL,
-    $client->getContent(), PHP_EOL;
+echo $client . ' ' . $client->getCode() . ' (' . strlen($client->getContent()) . ')', PHP_EOL;
+echo $client->getContent(), PHP_EOL;
 ```
 <details><summary>See output</summary>
 
@@ -44,8 +45,8 @@ Tivins\Baz\Core\Net\Client#4 200 (497)
     "Content-Length": "0", 
     "Content-Type": "application/x-www-form-urlencoded", 
     "Host": "httpbin.org", 
-    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:103.0) Gecko/xx.xx.xx.xx Firefox/103.0", 
-    "X-Amzn-Trace-Id": "Root=1-63a8cbxx.xx.xx.xxb79adxx.xx.xx.xxe"
+    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:101.0) Gecko/xx.xx.xx.xx Firefox/101.0", 
+    "X-Amzn-Trace-Id": "Root=xx.xx.xx.xxb-786fdxx.xx.xx.xxbxx.xx.xx.xx"
   }, 
   "json": null, 
   "method": "GET", 
@@ -63,7 +64,9 @@ Tivins\Baz\Core\Net\Client#4 200 (497)
 
 ```php
 <?php
+
 use Tivins\Baz\Core\Net\Client;
+use Tivins\Baz\Core\Net\ClientException;
 use Tivins\Baz\Core\Net\Http\Header;
 use Tivins\Baz\Core\Net\Http\Headers;
 
@@ -74,13 +77,18 @@ $token = 'a-token-from-elsewhere';
 $headers = (new Headers())
     ->setHeader(Header::Authorization, 'Bearer ' . $token);
 
-$client = (new Client('https://httpbin.org/anything'))
-    ->setHeaders($headers)
-    ->postJSON(['yo'=>'lo'])
-    ->execute();
+try {
+    $client = (new Client('https://httpbin.org/anything'))
+        ->setHeaders($headers)
+        ->postJSON(['yo' => 'lo'])
+        ->execute();
+}
+catch (ClientException $e) {
+    exit($e->client . ' ' . $e->getMessage() . "\n");
+}
 
-echo $client . ' ' . $client->getCode() . ' (' . strlen($client->getContent()) . ')', PHP_EOL,
-$client->getContent(), PHP_EOL;
+echo $client . ' ' . $client->getCode() . ' (' . strlen($client->getContent()) . ')', PHP_EOL;
+echo $client->getContent(), PHP_EOL;
 ```
 <details><summary>See output</summary>
 
@@ -97,8 +105,8 @@ Tivins\Baz\Core\Net\Client#21 200 (568)
     "Content-Length": "11", 
     "Content-Type": "application/json", 
     "Host": "httpbin.org", 
-    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:105.0) Gecko/xx.xx.xx.xx Firefox/105.0", 
-    "X-Amzn-Trace-Id": "Root=1-63a8cbxx.xx.xx.xxca3faxx.xx.xx.xx"
+    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:101.0) Gecko/xx.xx.xx.xx Firefox/101.0", 
+    "X-Amzn-Trace-Id": "Root=xx.xx.xx.xxb-1cf5a2cc3ddeea2a1630bb96"
   }, 
   "json": {
     "yo": "lo"
@@ -112,7 +120,7 @@ Tivins\Baz\Core\Net\Client#21 200 (568)
 </details>
 
 
-## Asynchronous
+### Asynchronous
 
 
 
@@ -157,7 +165,7 @@ Tivins\Baz\Core\Net\ClientAsync#4 200 (497)
     "Content-Type": "application/x-www-form-urlencoded", 
     "Host": "httpbin.org", 
     "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:100.0) Gecko/xx.xx.xx.xx Firefox/100.0", 
-    "X-Amzn-Trace-Id": "Root=1-63a8cbxx.xx.xx.xxafxx.xx.xx.xxe"
+    "X-Amzn-Trace-Id": "Root=xx.xx.xx.xxc-03bce492742dfd8f421ef82b"
   }, 
   "json": null, 
   "method": "GET", 
