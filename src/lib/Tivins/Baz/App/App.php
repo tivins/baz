@@ -2,17 +2,33 @@
 
 namespace Tivins\Baz\App;
 
-class App
+use Tivins\Core\Code\Singleton;
+use Tivins\Database\Database;
+
+class App extends Singleton
 {
-    private static int $timeStart = 0;
+    private Database $database;
+    private int $timeStart = 0;
 
-    public static function start(): void
+    protected function __construct()
     {
-        self::$timeStart = microtime(true);
+        parent::__construct();
+        $this->timeStart = microtime(true);
     }
 
-    public static function getTimeStart(): int
+    public function getTimeStart(): int
     {
-        return self::$timeStart;
+        return $this->timeStart;
     }
+
+    public function setDatabase(Database $database): void
+    {
+        $this->database = $database;
+    }
+
+    public function db(): Database
+    {
+        return $this->database;
+    }
+
 }

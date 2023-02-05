@@ -2,6 +2,18 @@
 
 ## Installation
 
+```shell
+composer require tivins/baz dev-main
+```
+
+using **deven**<sup>[(1)][deven]</sup>
+
+```shell
+deven new-project MyProject my-project
+deven cert-self my-project.test
+deven up
+```
+
 ### Create Schema
 ```php
 namespace MyNamespace;
@@ -86,3 +98,13 @@ if ( !defined('APP_INSTALL')) {
     require App::getModelsFilename();
 }
 ```
+
+----
+
+### Deven
+
+Deven is a dockerized LAMP environment.
+
+----
+
+[deven]: #deven
