@@ -1,13 +1,15 @@
 #!/usr/bin/env php
 <?php
 
-use Tivins\Core\OptionArg;
+use Tivins\Baz\App\CLI;
 use Tivins\Core\OptionsArgs;
 
-include $_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php';
+$autoLoad = $_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php';
+if (! file_exists($autoLoad)) {
+    $autoLoad = realpath(__dir__ . '/../../../../../../vendor/autoload.php');
+    // var_dump($autoLoad,file_exists($autoLoad));die;
+}
+require $autoLoad;
 
-$args = OptionsArgs::newParsed(
-    new OptionArg('uri', true, 'u')
-);
-
-var_dump($args->getParsed());
+$opts = OptionsArgs::newParsed(CLI::getURIOption());
+CLI::bootstrap($opts);
