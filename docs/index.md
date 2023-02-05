@@ -2,11 +2,12 @@
 
 ## Install
 
+Using composer
 ```shell
 composer require tivins/baz-core dev-main
 ```
 
 ## Content
 
-* [core](/baz/core)
+* [core](https://tivins.github.io/php-common)
 * [framework](/baz/framework)

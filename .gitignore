@@ -1,2 +1,4 @@
-/vendor/
+vendor/
+.idea
 .phpunit.result.cache
+example/composer.lock

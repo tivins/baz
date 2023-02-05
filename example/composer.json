@@ -1,0 +1,19 @@
+{
+  "name": "tivins/baz-example",
+  "description": "description",
+  "minimum-stability": "dev",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Tivins"
+    }
+  ],
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Tivins\\": "../src/lib/Tivins",
+      "Example\\": "src"
+    }
+  }
+}
