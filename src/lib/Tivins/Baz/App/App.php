@@ -8,7 +8,7 @@ use Tivins\Database\Database;
 class App extends Singleton
 {
     private Database $database;
-    private int $timeStart = 0;
+    private float $timeStart = 0;
 
     protected function __construct()
     {
@@ -16,7 +16,7 @@ class App extends Singleton
         $this->timeStart = microtime(true);
     }
 
-    public function getTimeStart(): int
+    public function getTimeStart(): float
     {
         return $this->timeStart;
     }

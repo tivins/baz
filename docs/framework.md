@@ -5,6 +5,15 @@
 ```shell
 composer require tivins/baz dev-main
 ```
+```
+composer init \
+    --no-interaction \
+    --name="me/my-project" \
+    --type="project" \
+    --stability="dev" \
+    --autoload="src/Me/MyProject" \
+    --require="tivins/baz:dev-main"
+```
 
 using **deven**<sup>[(1)][deven]</sup>
 

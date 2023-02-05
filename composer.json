@@ -10,7 +10,7 @@
     }
   ],
   "bin": [
-    "src/lib/Tivins/Baz/Install/bin/prepare.php"
+    "src/lib/Tivins/Baz/Install/bin/baz"
   ],
   "require": {
     "tivins/database": "dev-main",

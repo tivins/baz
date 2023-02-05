@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+
+use Tivins\Core\OptionArg;
+use Tivins\Core\OptionsArgs;
+
+include $_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php';
+
+$args = OptionsArgs::newParsed(
+    new OptionArg('uri', true, 'u')
+);
+
+var_dump($args->getParsed());
