@@ -19,9 +19,29 @@ using **deven**<sup>[(1)][deven]</sup>
 
 ```shell
 deven new-project MyProject my-project
-deven cert-self my-project.test
-deven up
+deven cert-self my-project.test # optional
+deven php vendor/bin/baz install
+# Open http://my-project.test:8080 (according to your configuration)
+# Or https://my-project.test (self-signed certificate)
 ```
+
+## Using installer
+
+The `--uri` option is required on each call to `vendor/bin/baz`. 
+
+```shell
+# Interactive mode:
+vendor/bin/baz init --interactive \
+    --uri "my-project.test"  
+    # then, answer questions
+
+# Direct mode
+vendor/bin/baz init --use-default \
+    --uri "my-project.test"
+    # then, change in generator configuration files
+```
+
+## Manual installation
 
 ### Create Schema
 ```php
@@ -112,7 +132,9 @@ if ( !defined('APP_INSTALL')) {
 
 ### Deven
 
-Deven is a dockerized LAMP environment.
+Deven is a dockerized Apache/MariaDB/PHP8.2+ environment.
+
+Ping me for more information about it.
 
 ----
 

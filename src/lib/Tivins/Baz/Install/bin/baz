@@ -2,14 +2,36 @@
 <?php
 
 use Tivins\Baz\App\CLI;
+use Tivins\Baz\Install\Run\Baz;
+use Tivins\Core\OptionArg;
 use Tivins\Core\OptionsArgs;
 
 $autoLoad = $_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php';
 if (! file_exists($autoLoad)) {
+    /**
+     * Try local (not in the context of vendor/bin).
+     */
     $autoLoad = realpath(__dir__ . '/../../../../../../vendor/autoload.php');
-    // var_dump($autoLoad,file_exists($autoLoad));die;
+}
+if (! file_exists($autoLoad)) {
+    die("Autoload is missing\n");
 }
 require $autoLoad;
 
-$opts = OptionsArgs::newParsed(CLI::getURIOption());
-CLI::bootstrap($opts);
+define('ROOT_PATH', realpath(dirname($autoLoad).'/..'));
+
+$opts = OptionsArgs::newParsed(
+    CLI::getURIOption(),
+    new OptionArg('action', true, 'a'),
+    new OptionArg('name', true, 'n'),    // generic options used by sub-processes
+    new OptionArg('data', true, 'd'),    // generic options used by sub-processes
+);
+var_dump($opts->getParsed());
+switch ($opts->getValue('action')) {
+    case 'install':
+        Baz::getInstance()->install($opts->getParsed());
+        break;
+    case 'check':
+        CLI::bootstrap($opts);
+        break;
+}

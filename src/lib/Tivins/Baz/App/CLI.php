@@ -13,6 +13,11 @@ class CLI
      *
      *     $opts = OptionsArgs::newParsed(CLI::getURIOption());
      *     CLI::bootstrap($opts);
+     *
+     * * Parse options and detect `--uri` required argument.
+     * * Defines the `$_SERVER['HTTP_HOST']` super-global.
+     * * Loads the proper setting file.
+     * * Call bootstrap program.
      */
     public static function bootstrap(OptionsArgs $args): void
     {
@@ -30,7 +35,7 @@ class CLI
     }
 
     /**
-     * Retourne l'option pour l'URI (`--uri`, `-u`) à utiliser dans les scripts CLI.
+     * Returns the option for the URI (`--uri`, `-u`) to use in CLI scripts.
      */
     public static function getURIOption(): OptionArg
     {

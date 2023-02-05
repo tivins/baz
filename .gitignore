@@ -1,4 +1,8 @@
-vendor/
+/vendor/
 .idea
 .phpunit.result.cache
-example/composer.lock
+
+# install-test result files
+/boot.php
+/settings/example.com:8080.php
+/public
