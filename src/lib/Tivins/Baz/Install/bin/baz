@@ -25,13 +25,18 @@ $opts = OptionsArgs::newParsed(
     new OptionArg('action', true, 'a'),
     new OptionArg('name', true, 'n'),    // generic options used by sub-processes
     new OptionArg('data', true, 'd'),    // generic options used by sub-processes
+    new OptionArg('db', true),    // generic options used by sub-processes
 );
-var_dump($opts->getParsed());
+
+$baz = Baz::getInstance();
 switch ($opts->getValue('action')) {
+
+    # src/lib/Tivins/Baz/Install/bin/baz -u baz.test -a install -db '["BazMedia","puxdwoop","Kew26slaG5iFUOn8","dbms"]'
     case 'install':
-        Baz::getInstance()->install($opts->getParsed());
+        $baz->install($opts->getParsed());
         break;
     case 'check':
         CLI::bootstrap($opts);
+        // $baz->check();
         break;
 }
